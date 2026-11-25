@@ -29,14 +29,14 @@
 | [LOWERTOP/Shadowrocket](https://github.com/LOWERTOP/Shadowrocket) `lazy_group.conf` | 设计参考与原始快照 | 仓库没有 LICENSE 文件。文件头写明基于官方群组「懒人配置.conf 2025-02-26 22:31:11」 |
 | [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) | 通用分流、服务及广告规则 | [GPL-2.0](https://github.com/blackmatrix7/ios_rule_script/blob/0b6897dc17e0c513d25449c935a9694818e32f0c/LICENSE)，README 另有转载声明。本仓库引用 URL |
 | [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule) | 多个 App 的纯广告规则 | [GPL-3.0](https://github.com/TG-Twilight/AWAvenue-Ads-Rule/blob/8965815bf3978bdaccdd7a18ec694db67e14d5c1/LICENSE)。本仓库引用 URL |
-| [YUDIDIFEI/Scripts](https://github.com/YUDIDIFEI/Scripts) | 海外 AI 域名规则 | 仓库根目录未提供独立许可证。第三方来源见 [许可声明](https://github.com/YUDIDIFEI/Scripts/blob/30f374f407c20ba3ba1e4cb02650cdd658a3d42e/THIRD_PARTY_NOTICES.md) |
+| [Rabbit-Spec/Surge](https://github.com/Rabbit-Spec/Surge) | 海外 AI 规则集 | 仓库根目录未提供独立许可证，[上游声明](https://github.com/Rabbit-Spec/Surge/blob/ac196362fe300a226a15cdfdf74bde9454044ef1/README.md#免责声明)限制商业用途。本仓库引用 URL |
 | [Repcz/Tool](https://github.com/Repcz/Tool) | 配置与聚合结构参考 | [MIT](https://github.com/Repcz/Tool/blob/f38c422b03d81dbc73cf9eb233698c04f4fbd053/LICENSE)，README 另有限制转载的声明 |
 | [iab0x00/ProxyRules](https://github.com/iab0x00/ProxyRules) | 服务规则与转换模块参考 | 没有根许可证。[README](https://github.com/iab0x00/ProxyRules/blob/96cfe3360e70a2031b034fa0e8dd8228d1a7c3c7/README.md) 声明限制使用及转载 |
 | [Johnshall/Shadowrocket-ADBlock-Rules-Forever](https://github.com/Johnshall/Shadowrocket-ADBlock-Rules-Forever) | 规则构建与发布参考 | [CC BY-SA 4.0](https://github.com/Johnshall/Shadowrocket-ADBlock-Rules-Forever/blob/192f7e7e5a71d4210f6e6e5d5a6b7d0f4fada2ef/LICENSE) |
 | [luestr/ProxyResource](https://github.com/luestr/ProxyResource) | Loon 插件索引 | [CC BY-NC-SA 4.0](https://github.com/luestr/ProxyResource/blob/b7f70ce6ed207a2225851f0a2827675a3a538fe3/LICENSE)，仅配置模板声明开源，外部插件需另核对 |
 | [akiralereal/shadowrocket-toolkit](https://github.com/akiralereal/shadowrocket-toolkit) | 原生模块与依赖验证参考 | [GPL-3.0](https://github.com/akiralereal/shadowrocket-toolkit/blob/f45de28fe932249503bf4d50a285884bc643ca94/LICENSE)，第三方文件另附声明和许可证 |
 
-公开可访问不等于可以镜像或再分发。公共规则直接引用 blackmatrix7、AWAvenue 和 YUDIDIFEI/Scripts 的上游文件。Module、Rewrite、MITM 和 JavaScript 不自动更新；真要使用时，固定提交、核对内容，并保留回滚。
+公开可访问不等于可以镜像或再分发。公共规则直接引用 blackmatrix7、AWAvenue 和 Rabbit-Spec 的上游文件。Module、Rewrite、MITM 和 JavaScript 不自动更新；真要使用时，固定提交、核对内容，并保留回滚。
 
 上游快照：
 
@@ -129,7 +129,7 @@ YouTube、Netflix 仍共用「🎬 流媒体」。Google、微软、GitHub、X�
 6. 流媒体规则集。YouTube 在 Google 列表前面。
 7. Steam 国区直连，Steam 国际、Epic、Nintendo 进入「🎮 游戏」。
 8. Apple 域名集和规则集，进入「🍎 苹果服务」。
-9. 海外 AI 规则集进入「🤖 AI」，然后才是 Google、微软、GitHub、X、Facebook、Telegram。
+9. Rabbit-Spec `AIGC.list` 进入「🤖 AI」，然后才是 Google、微软、GitHub、X、Facebook、Telegram。
 10. 中国域名集和规则集，直连。
 11. Global 域名集和规则集，进入「🚀 代理」。
 12. `GEOIP,CN,DIRECT`。
@@ -156,7 +156,7 @@ Tailscale 使用前要在 Shadowrocket「设置 > Tailscale」启用。需要 2.
 
 `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/`
 
-通用规则来自 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 的 `master` 分支。App 广告补充引用 AWAvenue 的 `main` 分支，海外 AI 引用 YUDIDIFEI/Scripts 的 `master` 分支。
+通用规则来自 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 的 `master` 分支。App 广告补充引用 AWAvenue 的 `main` 分支。海外 AI 引用 Rabbit-Spec/Surge 的 `Master` 分支。
 
 域名规则超过 1000 条时，项目会把域名拆到 `*_Domain.list`。只引用短的 `.list` 会丢掉绝大部分域名。Apple、中国、Global 和去广告因此各用一对文件：`DOMAIN-SET` 引用域名集，`RULE-SET` 引用关键字、User-Agent、URL 正则和 IP。这个拆分来自项目自己的说明，以及 Apple 规则被误认为「只剩几十条」的问题记录。
 
@@ -168,7 +168,7 @@ Quantumult X 文件使用 `HOST-SUFFIX` 等类型。LOWERTOP 手册列出的 Sha
 | `Advertising/Advertising_Domain.list` | DOMAIN-SET | REJECT | 2026-10-28 | 去广告域名主体，约 29 万条 |
 | `Advertising/Advertising.list` | RULE-SET | REJECT | 2026-10-28 | 关键字、URL 正则和带 `no-resolve` 的 IP |
 | `AWAvenue-Ads-Rule-Surge-RULE-SET-Only.Ads.list` | RULE-SET | REJECT | 2026-11-23 | 补充多个 App 的开屏及广告 SDK 域名 |
-| [YUDIDIFEI `AI.list`](https://github.com/YUDIDIFEI/Scripts/blob/30f374f407c20ba3ba1e4cb02650cdd658a3d42e/rule/Shadowrocket/AI/AI.list) | RULE-SET | 🤖 AI | 2026-11-25 | 写在 Google 列表前。列表内的 Gemini 域名进 AI，不另写本地例外 |
+| [Rabbit-Spec `AIGC.list`](https://github.com/Rabbit-Spec/Surge/blob/ac196362fe300a226a15cdfdf74bde9454044ef1/Rules/AIGC.list) | RULE-SET | 🤖 AI | 2026-11-25 | 覆盖 ChatGPT、Claude、Gemini、Antigravity、Grok 和 Copilot 等服务。IP 和 ASN 规则带 `no-resolve` |
 | `YouTube/YouTube.list` | RULE-SET | 🎬 流媒体 | 2025-06-06 | 需要独立出口 |
 | `Netflix/Netflix.list` | RULE-SET | 🎬 流媒体 | 2025-06-06 | 同上 |
 | `Disney/Disney.list` | RULE-SET | 🎬 流媒体 | 2025-07-30 | 同上 |
@@ -199,10 +199,10 @@ Quantumult X 文件使用 `HOST-SUFFIX` 等类型。LOWERTOP 手册列出的 Sha
 - 不用 `Proxy.list`。它和 Global 都是国外代理列表。
 - 不用 `ChinaMax.list`。体积很大，并带有大量 User-Agent，和中国列表、GEOIP 重复。
 - 不单独引用哔哩哔哩、微信、百度、抖音等。`bilibili.com`、`qq.com`、`taobao.com` 已在中国域名集。
-- GitHub 使用独立列表，写在 Global 前面。GitHub Copilot 专用域名仍由更早的 AI 规则集匹配。
+- GitHub 使用独立列表，写在 Global 前面。GitHub Copilot 专用域名和 `api.github.com` 由更早的 AIGC 规则集匹配。
 - 不引用 Instagram、WhatsApp 短列表。Facebook 列表已经包含这些域名。
 - 不引用 Amazon 列表。其中有 AWS 域名，会把大量第三方服务带进同一个组。
-- 海外 AI 直接引用一份 Shadowrocket `AI.list`，写在 Google 列表前面。列表里已有的 Gemini 域名进「🤖 AI」，没有再手写一套 Google AI 域名。其余 Google 流量进「🔍 Google」。 [取样提交](https://github.com/YUDIDIFEI/Scripts/blob/30f374f407c20ba3ba1e4cb02650cdd658a3d42e/rule/Shadowrocket/AI/AI.list)
+- 海外 AI 直接引用 Rabbit-Spec 的 `AIGC.list`。Gemini、Antigravity 和 `daily-cloudcode-pa.sandbox.googleapis.com` 先匹配「🤖 AI」，`play.googleapis.com` 命中「🔍 Google」。上游也包含 `stripe.com`，该域名进入「🤖 AI」。`copilot.microsoft.com` 进入「🤖 AI」，`copilot.cloud.microsoft` 由「🪟 微软」匹配。 [AIGC 规则](https://github.com/Rabbit-Spec/Surge/blob/ac196362fe300a226a15cdfdf74bde9454044ef1/Rules/AIGC.list)
 - Repcz 的 HBO 列表包含所需的 Max 域名，也包含整个 `s3-ap-southeast-1.amazonaws.com`。保留 blackmatrix7 HBO 和两条独立的 Max 后缀，避免把该 S3 区域一起送入流媒体组。 [Repcz HBO 列表](https://github.com/Repcz/Tool/blob/X/Shadowrocket/Rules/HBO.list)
 - 不引用 `Game.list`。其中有 `login.live.com` 和国内游戏域名。
 - 不引用 `Sony.list`。其中同时有 `sony.com` 和 `sony.com.cn`。
@@ -210,7 +210,7 @@ Quantumult X 文件使用 `HOST-SUFFIX` 等类型。LOWERTOP 手册列出的 Sha
 - 不引入 Loyalsoldier。它与 Global、GEOIP 的职责重叠。
 - 广告规则使用 blackmatrix7 `Advertising` 和秋风广告规则 `Only.Ads`。`Only.Ads` 有 671 条规则，其中 654 条是精确域名或后缀。与 blackmatrix7 的域名、后缀和关键字对照，有 220 条尚未覆盖，包括 `api.aqyad.com`、`adxstatic.vivo.com.cn`、`adsfileretry.service.kugou.com` 和 `ads-vp5.xhscdn.com`。`api.aqyad.com` 现由远程规则维护。 [取样版本](https://github.com/TG-Twilight/AWAvenue-Ads-Rule/blob/8965815bf3978bdaccdd7a18ec694db67e14d5c1/Filters/AWAvenue-Ads-Rule-Surge-RULE-SET-Only.Ads.list) · [Shadowrocket 引用方法](https://doc.awads.cc/ShadowRocket.html)
 
-重新编译时，blackmatrix7 和 YUDIDIFEI/Scripts 从 `master` 获取规则，AWAvenue 从 `main` 获取规则。需要冻结版本时，把对应 URL 的分支名换成该仓库的提交哈希。
+重新编译时，blackmatrix7 从 `master` 获取规则，AWAvenue 从 `main` 获取规则，Rabbit-Spec 从 `Master` 获取规则。需要冻结版本时，把对应 URL 的分支名换成该仓库的提交哈希。
 
 已知的远程列表瑕疵，默认出口相同时影响较小，一旦把「流媒体」或「游戏」改到其他地区就会显现：
 
@@ -221,7 +221,7 @@ Quantumult X 文件使用 `HOST-SUFFIX` 等类型。LOWERTOP 手册列出的 Sha
 - 中国规则含有 `DOMAIN-SUFFIX,ms`，会让 `.ms` 后缀直连。
 - 中国规则含有 `DOMAIN-KEYWORD,microsoft` 和 `USER-AGENT,Microsoft*`。Microsoft 规则写在前面，已收录的微软域名仍走代理；没命中微软列表、但 User-Agent 像微软的请求，可能在到达中国规则后直连。
 - Microsoft 列表含有 `live.com`、`office.com` 这类较宽后缀，因此这些域名进入「🪟 微软」。该组默认仍是「🚀 代理」。
-- Google 列表的 `DOMAIN-KEYWORD,google` 是子串匹配，并包含 `google.com`、`googleapis.com`、`gstatic.com`、`appspot.com`、`run.app`、`web.app`、`cloudfunctions.net`、`blogspot` 和 `schema.org`。AI 列表写在它前面，已收录的 Gemini 域名先进入「🤖 AI」。没被 AI 列表收录的 Google 域名仍进「🔍 Google」。把该组改到其他地区后，这些域名会跟着走。
+- Google 列表的 `DOMAIN-KEYWORD,google` 是子串匹配，并包含 `google.com`、`googleapis.com`、`gstatic.com`、`appspot.com`、`run.app`、`web.app`、`cloudfunctions.net`、`blogspot` 和 `schema.org`。AIGC 列表写在它前面。命中 Google 列表的域名随「🔍 Google」选择出口。
 - Facebook 列表含有 `groups.com`、`i.org`、`login-account.net`、`flow.dev`、`parse.com`。Instagram 和 WhatsApp 也在这份列表里。
 - Telegram 列表含有 `contest.com`、`graph.org`、`usercontent.dev`。IP 和 ASN 规则带 `no-resolve`。
 - X 列表含有 `grok.com`，但 AI 规则写在前面，Grok 仍进「🤖 AI」。
@@ -263,8 +263,8 @@ Quantumult X 文件使用 `HOST-SUFFIX` 等类型。LOWERTOP 手册列出的 Sha
 
 ### blackmatrix7 的覆盖与规则优先级
 
-- 通用层用 `Lan`、`China`、`Global` 配合本地 `GEOIP,CN`。`Proxy` 的 6,859 条域名或后缀中有 6,856 条被 `Global` 的域名和后缀覆盖。差异包括 `chat.openai.com`，现有 `openai.com` 本地规则已将其送入 AI 组。`ChinaMax` 含更多域名、IP 和 ASN。`China` 的 3,691 条域名或后缀有 3,547 条被 `ChinaMax` 的域名和后缀覆盖，因此两者有交集，但不能按文件名假定是严格包含。 [Global](https://github.com/blackmatrix7/ios_rule_script/tree/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Global) · [Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Proxy) · [ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/ChinaMax)
-- 精细层按服务选择独立出口。`OpenAI` 含 `sentry.io`、`stripe.com` 和 ASN，`Copilot` 含 `www.bing.com`，部分目标会影响其他服务。当前优先级下，`chatgpt.com` 进 AI，`api.github.com` 进普通代理，`sentry.io` 先命中广告规则。改用完整 AI 列表时，其位置会决定这些重叠目标被拒绝还是改走 AI 出口。`captive.apple.com` 的本地直连则先于 Apple 集合。 [OpenAI](https://github.com/blackmatrix7/ios_rule_script/blob/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/OpenAI/OpenAI.list) · [Copilot](https://github.com/blackmatrix7/ios_rule_script/blob/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Copilot/Copilot.list)
+- 通用层用 `Lan`、`China`、`Global` 配合本地 `GEOIP,CN`。`Proxy` 的 6,859 条域名或后缀中有 6,856 条被 `Global` 的域名和后缀覆盖。差异包括 `chat.openai.com`，远程 AI 列表中的 `openai.com` 后缀规则会将其送入 AI 组。`ChinaMax` 含更多域名、IP 和 ASN。`China` 的 3,691 条域名或后缀有 3,547 条被 `ChinaMax` 的域名和后缀覆盖，因此两者有交集，但不能按文件名假定是严格包含。 [Global](https://github.com/blackmatrix7/ios_rule_script/tree/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Global) · [Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Proxy) · [ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/ChinaMax)
+- 精细层按服务选择独立出口。`OpenAI` 含 `sentry.io`、`stripe.com` 和 ASN，`Copilot` 含 `www.bing.com`，部分目标会影响其他服务。当前优先级下，`chatgpt.com`、`api.github.com` 和 `stripe.com` 命中 AIGC，`sentry.io` 先命中广告规则。`captive.apple.com` 的本地直连先于 Apple 集合。 [OpenAI](https://github.com/blackmatrix7/ios_rule_script/blob/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/OpenAI/OpenAI.list) · [Copilot](https://github.com/blackmatrix7/ios_rule_script/blob/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Copilot/Copilot.list)
 - 广告层的 `Advertising_Domain.list` 有 290,392 条域名，`Advertising.list` 有 278 条关键字、489 条 IP 规则和 14 条 URL 正则。对照同版本 `Advertising_Resolve.list`，实际差异是 IP 规则是否带 `no-resolve`。一对文件都要引用才能保留域名和带类型的规则。HTTPS 路径匹配需要解密，当前配置只使用现有纯规则策略。`googleadservices.com` 会先被拒绝，`ads.youtube.com` 由新增的 AWAvenue 纯广告表匹配。与正片共用 HTTPS 主机的广告需要按路径或响应处理。 [Advertising 说明](https://github.com/blackmatrix7/ios_rule_script/blob/0b6897dc17e0c513d25449c935a9694818e32f0c/rule/Shadowrocket/Advertising/README.md)
 
 ### 广告候选的有效重叠
@@ -311,7 +311,7 @@ Quantumult X 文件使用 `HOST-SUFFIX` 等类型。LOWERTOP 手册列出的 Sha
 
 公开仓库 `Tool/` 内是 Clash、Loon、Quantumult X 配置，`Resource/Ad/` 中是说明页，插件安装指向外部中心。在仓库快照中未找到 Shadowrocket 原生模块。iab0x00 的 `PluginHub2Rocket.srmodule` 展示了转换链：改写 Loon `.lpx` 导入链接，经 Script-Hub 生成 Shadowrocket 模块，并需要对插件中心启用 MITM。转换路径的存在不能验证每个插件的规则、脚本 API 或改写行为在 Shadowrocket 上等价。插件目录保留为索引参考。luestr 的 README 另列商业用途和传播范围的声明，外部插件由插件来源单独核对。 [luestr 仓库说明](https://github.com/luestr/ProxyResource/blob/b7f70ce6ed207a2225851f0a2827675a3a538fe3/README.md) · [插件中心](https://hub.kelee.one/) · [转换模块源码](https://github.com/iab0x00/ProxyRules/blob/96cfe3360e70a2031b034fa0e8dd8228d1a7c3c7/Rewrite/PluginHub2Rocket.srmodule)
 
-候选项目的根许可证及附加声明见上文。聚合规则或脚本中的单项来源要以各自的版权和授权记录核对。LOWERTOP 和 iab0x00 的取样树均没有根许可证，LOWERTOP 的现有原文快照按本地参考管理。主配置的远程规则来源是 blackmatrix7、AWAvenue 和 YUDIDIFEI/Scripts 的海外 AI 列表。Johnshall 的 LOWERTOP 镜像、Repcz 的聚合规则和各类广告变体作为比较材料。
+候选项目的根许可证及附加声明见上文。聚合规则或脚本中的单项来源要以各自的版权和授权记录核对。LOWERTOP 和 iab0x00 的取样树均没有根许可证，LOWERTOP 的现有原文快照按本地参考管理。主配置的远程规则来源是 blackmatrix7、AWAvenue 和 Rabbit-Spec。Johnshall 的 LOWERTOP 镜像、Repcz 的聚合规则和各类广告变体作为比较材料。
 
 ## 与 LOWERTOP 的主要差异
 
@@ -394,7 +394,7 @@ LOWERTOP 发布新版本时：
 
 不要用上游文件覆盖个人配置。
 
-每次编译会按配置里的链接拉取 blackmatrix7、AWAvenue 和 YUDIDIFEI/Scripts。规则集 URL 页面会显示下载结果。
+每次编译会按配置里的链接拉取远程规则。规则集 URL 页面会显示下载结果。
 
 ## 故障排查
 
@@ -419,7 +419,8 @@ Tailscale 不通：
 AI 能开页面但不能登录或调用：
 
 - ChatGPT、Claude、Grok、Copilot 用「测试规则」核对，策略应是「🤖 AI」。
-- `gemini.google.com` 在 AI 列表中，策略应是「🤖 AI」。不在该列表里的 Google 域名命中「🔍 Google」，默认跟随「🚀 代理」。
+- 更新配置后点「使用配置」或「编译配置」，确认 `AIGC.list` 下载成功。规则集 URL 页面单独重新拉取资源后，仍需编译配置。 [Shadowrocket 使用手册](https://github.com/LOWERTOP/Shadowrocket/wiki/Home/73f521483aea46924cbf691c1d262a84fa249119#规则集url)
+- 用「测试规则」查看实际命中的规则及策略。按配置顺序，`gemini.google.com` 和 `antigravity.google.com` 应命中 `AIGC.list`，`play.googleapis.com` 应命中「🔍 Google」。
 
 ## 回滚
 
