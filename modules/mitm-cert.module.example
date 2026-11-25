@@ -1,0 +1,12 @@
+#!name=MITM 证书
+#!desc=证书模板。复制为 modules/mitm-cert.module 后只在本地填写，不要提交，也不要上传到 CDN。
+
+[MITM]
+# 先在一份配置里生成 CA 证书，安装并在系统里信任，再启用本模块。
+# 未信任就启用时，软件可能报 No PKCS12 Certificates。
+# 证书内容：已安装证书的配置 → ⓘ → HTTPS 解密 → 证书 → ⓘ → 复制，粘贴到 ca-p12= 后面。
+# 身份证书密码粘贴到 ca-passphrase= 后面。安装提示里常见的默认密码是 Shadowrocket。
+# 这里不要放入从别人模块里复制来的私钥。
+enable=false
+ca-passphrase=
+ca-p12=

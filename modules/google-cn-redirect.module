@@ -1,0 +1,12 @@
+#!name=Google 国内入口跳转
+#!desc=把 g.cn 和 google.cn 302 到 www.google.com。HTTPS 生效还要另装并启用本地 MITM 证书模块。本模块没有证书和私钥。
+
+[URL Rewrite]
+(?i)^https?://(?:www\.)?(?:g\.cn|google\.cn)(?::[0-9]+)?(?:[/?#]|$) https://www.google.com 302
+
+[MITM]
+# %APPEND% 把域名追加到已有主机名列表，避免本模块覆盖其他模块或主配置的 hostname。
+# 不写 ca-p12、ca-passphrase、enable。是否解密由个人证书模块决定。
+# h2 只影响 HTTP/2 能否被解密。模块里的这项会覆盖主配置里的同名设置。
+h2 = true
+hostname = %APPEND% g.cn,www.g.cn,google.cn,www.google.cn
