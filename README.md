@@ -95,11 +95,11 @@ README.md                              设计决策和用法
 | 策略组 | 类型 | 默认 | 用途 |
 | --- | --- | --- | --- |
 | 🚀 代理 | select | 首页节点 `PROXY` | 普通代理流量。可改选地区组或 DIRECT |
-| 🤖 AI | select | 🚀 代理 | ChatGPT、Claude、Gemini、Grok、Copilot。要固定地区时手动选，不按延迟自动换 |
+| 🤖 AI | select | 🇺🇸 美国 | ChatGPT、Claude、Gemini、Grok、Copilot。规则在 Google 前面。默认美国，可改日本、新加坡、代理或直连 |
 | 🎬 流媒体 | select | 🚀 代理 | YouTube、Netflix、Disney、Max、Spotify、TikTok |
 | 🍎 苹果服务 | select | DIRECT | App Store、iCloud 等。需要时代理 |
 | 🎮 游戏 | select | 🚀 代理 | Steam 国际、Epic、Nintendo。国内游戏不进这个组 |
-| 🔍 Google | select | 🚀 代理 | 搜索、Gmail、Drive、Android、Google Cloud 托管域名。不含已命中的 Gemini 和 YouTube |
+| 🔍 Google | select | 🚀 代理 | 搜索、Gmail、Drive、Android 和 Google Cloud 托管域名。AI 列表已命中的域名不再进入本组，YouTube 由流媒体规则先匹配 |
 | 🪟 微软 | select | 🚀 代理 | Microsoft 365、Windows、登录域名。Copilot 专用域名仍归 AI |
 | 🐙 GitHub | select | 🚀 代理 | GitHub、GitHub Pages、npm。Copilot 专用域名仍归 AI |
 | 🐦 X | select | 🚀 代理 | X、Twitter、t.co。Grok 仍归 AI |
@@ -113,7 +113,7 @@ README.md                              设计决策和用法
 
 台湾和韩国没有建组。首页节点仍然可以直接选用这些地区的服务器。
 
-🤖 AI 默认跟随「🚀 代理」，也就是首页当前节点。延迟最低的地区节点不一定适合 AI。需要固定出口时，手动把 🤖 AI 改成「🇺🇸 美国」或其他地区，并接受该地区组此后会自动测速。
+🤖 AI 默认选「🇺🇸 美国」。可选出口还有「🚀 代理」、日本、新加坡和直连。选中美国组后，AI 流量会触发该组的自动测速。没有名称匹配的美国节点时，这个组是空的，需要改选其他出口。
 
 分组名称前的 Emoji 会显示在策略组列表里。规则里的策略名必须连同 Emoji 一起写。
 
@@ -125,11 +125,11 @@ YouTube、Netflix 仍共用「🎬 流媒体」。Google、微软、GitHub、X�
 2. Tailscale 地址段和可选的个人 tailnet 后缀。其余 `ts.net` 域名走「🚀 代理」。
 3. `localhost`、`.local`、`home.arpa`，然后是局域网规则集。
 4. blackmatrix7 通用广告规则及 AWAvenue 纯广告补充，策略为 `REJECT`。
-5. DeepSeek 直连，随后是海外 AI 远程规则集和 Antigravity 专用域名补充。
-6. 流媒体规则集。
+5. DeepSeek 直连。
+6. 流媒体规则集。YouTube 在 Google 列表前面。
 7. Steam 国区直连，Steam 国际、Epic、Nintendo 进入「🎮 游戏」。
 8. Apple 域名集和规则集，进入「🍎 苹果服务」。
-9. Gemini 的精确域名和带 `gemini` 的主机名进入「🤖 AI」，然后才是 Google、微软、GitHub、X、Facebook、Telegram。
+9. 海外 AI 规则集进入「🤖 AI」，然后才是 Google、微软、GitHub、X、Facebook、Telegram。
 10. 中国域名集和规则集，直连。
 11. Global 域名集和规则集，进入「🚀 代理」。
 12. `GEOIP,CN,DIRECT`。
@@ -168,7 +168,7 @@ Quantumult X 文件使用 `HOST-SUFFIX` 等类型。LOWERTOP 手册列出的 Sha
 | `Advertising/Advertising_Domain.list` | DOMAIN-SET | REJECT | 2026-10-28 | 去广告域名主体，约 29 万条 |
 | `Advertising/Advertising.list` | RULE-SET | REJECT | 2026-10-28 | 关键字、URL 正则和带 `no-resolve` 的 IP |
 | `AWAvenue-Ads-Rule-Surge-RULE-SET-Only.Ads.list` | RULE-SET | REJECT | 2026-11-23 | 补充多个 App 的开屏及广告 SDK 域名 |
-| [YUDIDIFEI `AI.list`](https://github.com/YUDIDIFEI/Scripts/blob/30f374f407c20ba3ba1e4cb02650cdd658a3d42e/rule/Shadowrocket/AI/AI.list) | RULE-SET | 🤖 AI | 2026-11-25 | 覆盖 ChatGPT、Claude、Gemini、Grok、Microsoft Copilot 和 GitHub Copilot 等海外 AI 服务 |
+| [YUDIDIFEI `AI.list`](https://github.com/YUDIDIFEI/Scripts/blob/30f374f407c20ba3ba1e4cb02650cdd658a3d42e/rule/Shadowrocket/AI/AI.list) | RULE-SET | 🤖 AI | 2026-11-25 | 写在 Google 列表前。列表内的 Gemini 域名进 AI，不另写本地例外 |
 | `YouTube/YouTube.list` | RULE-SET | 🎬 流媒体 | 2025-06-06 | 需要独立出口 |
 | `Netflix/Netflix.list` | RULE-SET | 🎬 流媒体 | 2025-06-06 | 同上 |
 | `Disney/Disney.list` | RULE-SET | 🎬 流媒体 | 2025-07-30 | 同上 |
@@ -181,7 +181,7 @@ Quantumult X 文件使用 `HOST-SUFFIX` 等类型。LOWERTOP 手册列出的 Sha
 | `Nintendo/Nintendo.list` | RULE-SET | 🎮 游戏 | 2026-05-04 | Nintendo |
 | `Apple/Apple_Domain.list` | DOMAIN-SET | 🍎 苹果服务 | 2026-10-26 | Apple 域名主体 |
 | `Apple/Apple.list` | RULE-SET | 🍎 苹果服务 | 2026-10-26 | 关键字、User-Agent、IP |
-| `Google/Google.list` | RULE-SET | 🔍 Google | 2026-05-12 | 不含 YouTube。关键字 `google`，并含 `appspot.com`、`run.app`、`web.app` |
+| `Google/Google.list` | RULE-SET | 🔍 Google | 2026-05-12 | 不含 YouTube。接收 AI 列表没有先命中的 Google 域名 |
 | `Microsoft/Microsoft.list` | RULE-SET | 🪟 微软 | 2025-12-08 | 避免被中国规则里的 `microsoft` 关键字直连 |
 | `GitHub/GitHub.list` | RULE-SET | 🐙 GitHub | 2025-06-12 | 从 Global 拆出。同时含 `npmjs.com`、`github.io` |
 | `Twitter/Twitter.list` | RULE-SET | 🐦 X | 2025-09-28 | `x.com`、`twitter.com`、`t.co` |
@@ -202,8 +202,7 @@ Quantumult X 文件使用 `HOST-SUFFIX` 等类型。LOWERTOP 手册列出的 Sha
 - GitHub 使用独立列表，写在 Global 前面。GitHub Copilot 专用域名仍由更早的 AI 规则集匹配。
 - 不引用 Instagram、WhatsApp 短列表。Facebook 列表已经包含这些域名。
 - 不引用 Amazon 列表。其中有 AWS 域名，会把大量第三方服务带进同一个组。
-- 海外 AI 直接引用一份 Shadowrocket `AI.list`，它以精确域名和后缀覆盖 33 类服务。取样有 178 条规则，普通 `googleapis.com`、`github.com`、`x.com` 和共享登录、支付域名沿既有分流。原先手写的 `ai.com` 未收录，按后续规则分流。 [取样提交](https://github.com/YUDIDIFEI/Scripts/blob/30f374f407c20ba3ba1e4cb02650cdd658a3d42e/rule/Shadowrocket/AI/AI.list)
-- 在 AI 规则集之后补充 `antigravity.google.com`（含子域）和 `daily-cloudcode-pa.sandbox.googleapis.com`（精确主机）。前者用于 Antigravity 的 Web OAuth 回调，后者是 Cloud Code 沙盒端点。 [Google 回调说明](https://antigravity.google/docs/build-plugins/) · [Cloud Code 沙盒规则参考](https://github.com/SukkaW/Surge/blob/master/Source/non_ip/ai.conf)
+- 海外 AI 直接引用一份 Shadowrocket `AI.list`，写在 Google 列表前面。列表里已有的 Gemini 域名进「🤖 AI」，没有再手写一套 Google AI 域名。其余 Google 流量进「🔍 Google」。 [取样提交](https://github.com/YUDIDIFEI/Scripts/blob/30f374f407c20ba3ba1e4cb02650cdd658a3d42e/rule/Shadowrocket/AI/AI.list)
 - Repcz 的 HBO 列表包含所需的 Max 域名，也包含整个 `s3-ap-southeast-1.amazonaws.com`。保留 blackmatrix7 HBO 和两条独立的 Max 后缀，避免把该 S3 区域一起送入流媒体组。 [Repcz HBO 列表](https://github.com/Repcz/Tool/blob/X/Shadowrocket/Rules/HBO.list)
 - 不引用 `Game.list`。其中有 `login.live.com` 和国内游戏域名。
 - 不引用 `Sony.list`。其中同时有 `sony.com` 和 `sony.com.cn`。
@@ -222,7 +221,7 @@ Quantumult X 文件使用 `HOST-SUFFIX` 等类型。LOWERTOP 手册列出的 Sha
 - 中国规则含有 `DOMAIN-SUFFIX,ms`，会让 `.ms` 后缀直连。
 - 中国规则含有 `DOMAIN-KEYWORD,microsoft` 和 `USER-AGENT,Microsoft*`。Microsoft 规则写在前面，已收录的微软域名仍走代理；没命中微软列表、但 User-Agent 像微软的请求，可能在到达中国规则后直连。
 - Microsoft 列表含有 `live.com`、`office.com` 这类较宽后缀，因此这些域名进入「🪟 微软」。该组默认仍是「🚀 代理」。
-- Google 列表的 `DOMAIN-KEYWORD,google` 是子串匹配，并包含 `google.com`、`googleapis.com`、`gstatic.com`、`appspot.com`、`run.app`、`web.app`、`cloudfunctions.net`、`blogspot` 和 `schema.org`。Gemini 的页面和生成接口已经用精确规则写在这份列表前面，归入「🤖 AI」。`accounts.google.com`、`googleusercontent.com` 以及未点名的 `clients6.google.com` 主机仍进「🔍 Google」。把该组改到其他地区后，这些托管域名会跟着走。
+- Google 列表的 `DOMAIN-KEYWORD,google` 是子串匹配，并包含 `google.com`、`googleapis.com`、`gstatic.com`、`appspot.com`、`run.app`、`web.app`、`cloudfunctions.net`、`blogspot` 和 `schema.org`。AI 列表写在它前面，已收录的 Gemini 域名先进入「🤖 AI」。没被 AI 列表收录的 Google 域名仍进「🔍 Google」。把该组改到其他地区后，这些域名会跟着走。
 - Facebook 列表含有 `groups.com`、`i.org`、`login-account.net`、`flow.dev`、`parse.com`。Instagram 和 WhatsApp 也在这份列表里。
 - Telegram 列表含有 `contest.com`、`graph.org`、`usercontent.dev`。IP 和 ASN 规则带 `no-resolve`。
 - X 列表含有 `grok.com`，但 AI 规则写在前面，Grok 仍进「🤖 AI」。
@@ -419,8 +418,8 @@ Tailscale 不通：
 
 AI 能开页面但不能登录或调用：
 
-- 用「测试规则」检查 `gemini.google.com`、`antigravity.google` 和 `cloudcode-pa.googleapis.com`。这几个域名应命中 `AI.list`。若落入普通代理，确认全局路由是「配置」、当前选中了这份配置，并在「规则集 URL」确认 `AI.list` 下载成功后重新编译。若仍不符，检查有无抢先匹配的模块。
-- 用「测试规则」检查 `gemini.google.com` 和 `generativelanguage.googleapis.com`，策略应是「🤖 AI」。若仍是「🔍 Google」或「🚀 代理」，重新编译后再看。`accounts.google.com` 和 `oauth2.googleapis.com` 由多个 Google 服务共用，仍命中「🔍 Google」。两组默认都跟随「🚀 代理」；只有把其中一个改到其他地区后，登录请求和对话请求才会分开。
+- ChatGPT、Claude、Grok、Copilot 用「测试规则」核对，策略应是「🤖 AI」。
+- `gemini.google.com` 在 AI 列表中，策略应是「🤖 AI」。不在该列表里的 Google 域名命中「🔍 Google」，默认跟随「🚀 代理」。
 
 ## 回滚
 
@@ -454,7 +453,7 @@ AI 能开页面但不能登录或调用：
 
 - 国内网站和 App。
 - 国外网站。
-- ChatGPT、Claude、Gemini；顺手看 Grok、Copilot、DeepSeek。
+- ChatGPT、Claude、Gemini、Grok、Copilot、DeepSeek。Gemini 应命中「🤖 AI」。
 - Apple 服务，包括 App Store 和 iCloud。
 - Microsoft 登录、GitHub、Google、X、Facebook、Instagram、WhatsApp、Telegram。改公司组出口后再看这些服务是否跟着切换。
 - 实际使用的流媒体和游戏。
